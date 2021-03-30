@@ -14,46 +14,34 @@ public class JpaMain {
     public static void main(String[] args) {
         EntityManagerFactory emf = createEntityManagerFactory("hello");
 
-        EntityManager em = emf.createEntityManager();  // 쉽게 보면 DB CONNECTION
+        EntityManager em = emf.createEntityManager();
 
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
         try {
-            //insert
-//            Member2 member = new Member2();
-//            member.setName(3L);
-//            member.setName("HelloC");
-//            em.persist(member);
 
-            //select
-//            Member2 findMember = em.find(Member2.class, 1L);
-//            System.out.println("findMember = " + findMember.getId());
-//            System.out.println("findMember = " + findMember.getName());
+            // 객체를 생성한 상태(비영속)
+            Member2 member = new Member2();
+            member.setId(100L);
+            member.setName("회원1");
 
-            //delete
-//            Member2 findMember = em.find(Member2.class, 1L);
-//            em.remove(findMember);
+            // 객체를 저장한 상태(영속)
+            System.out.println("===Before==="); // DB에 저장안됨
+            em.persist(member);
+            System.out.println("===After==="); // DB에 저장안됨
 
-            // update
-//            Member2 findMember = em.find(Member2.class, 1L);
-//            findMember.setName("HelloJPA");
 
-            //JPQL
-            List<Member2> result = em.createQuery("select m from Member2 as m", Member2.class)
-                    .setFirstResult(5)
-                    .setMaxResults(8)
-                    .getResultList();
+//            // 회원 엔티티를 영속성 컨텍스트에서 분리, 준영속 상태
+//            em.detach(member);
+//            // 객체를 삭제한 상태(삭제)
+//            em.remove(member);
 
-            for (Member2 member : result) {
-                System.out.println("member.name = " + member.getName());
-            }
-
-            tx.commit();  // 문제발생 안하면 커밋
+            tx.commit();    // 여기서 DB에 저장
         } catch (Exception e) {
-            tx.rollback();  // 문제발생하면 롤백
+            tx.rollback();
         } finally {
-            em.close();  // EntityManager가 꼭 닫혀야 함!
+            em.close();
         }
         emf.close();
     }
