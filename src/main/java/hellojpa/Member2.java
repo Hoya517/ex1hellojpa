@@ -1,15 +1,17 @@
 package hellojpa;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "MBR")
 public class Member2 {
 
     @Id
     private Long id;
+
+    @Column(unique = true, length = 10)
     private String name;
 
     // JPA에서 생성자를 사용하려면 기본생성자는 무조건 있어야함.
