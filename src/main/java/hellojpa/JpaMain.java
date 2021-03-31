@@ -23,13 +23,15 @@ public class JpaMain {
 
             // 객체를 생성한 상태(비영속)
             Member2 member = new Member2();
-            member.setId(100L);
+            member.setId(101L);
             member.setName("회원1");
 
             // 객체를 저장한 상태(영속)
             System.out.println("===Before==="); // DB에 저장안됨
             em.persist(member);
             System.out.println("===After==="); // DB에 저장안됨
+
+            Member2 findMember = em.find(Member2.class, 101L);
 
 
 //            // 회원 엔티티를 영속성 컨텍스트에서 분리, 준영속 상태

@@ -11,6 +11,16 @@ public class Member2 {
     private Long id;
     private String name;
 
+    // JPA에서 생성자를 사용하려면 기본생성자는 무조건 있어야함.
+    public Member2() {
+
+    }
+
+    public Member2(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
