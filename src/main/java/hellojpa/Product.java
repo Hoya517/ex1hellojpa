@@ -11,7 +11,6 @@ public class Product {
     private Long id;
     private String name;
 
-    // 양방향
     @OneToMany(mappedBy = "product")
     private List<MemberProduct> memberProducts = new ArrayList<>();
 
