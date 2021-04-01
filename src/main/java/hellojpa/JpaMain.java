@@ -1,12 +1,8 @@
 package hellojpa;
 
-import javassist.compiler.ast.Member;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-
-import java.util.List;
 
 import static javax.persistence.Persistence.createEntityManagerFactory;
 
@@ -21,13 +17,22 @@ public class JpaMain {
 
         try {
 
-            Member2 member = new Member2();
-            member.setUsername("C");
+            // 팀 저장
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
 
-            System.out.println("================");
+            // 회원 저장
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setTeamId(team.getId());
             em.persist(member);
-            System.out.println("member.id = " + member.getId());
-            System.out.println("================");
+
+            //조회 
+            Member findMember = em.find(Member.class, member.getId());
+
+            //연관관계가 없음 
+            Team findTeam = em.find(Team.class, team.getId());
 
             tx.commit();
         } catch (Exception e) {
