@@ -15,6 +15,9 @@ public class Member {
     @Column(name = "USERNAME")
     private String username;
 
+    @Enumerated(EnumType.STRING)
+    private RoleType roleType;
+
     @ManyToOne
     @JoinColumn(name = "TEAM_ID" ,insertable = false, updatable = false)
     private Team team;
@@ -42,4 +45,35 @@ public class Member {
         this.username = username;
     }
 
+    public RoleType getRoleType() {
+        return roleType;
+    }
+
+    public void setRoleType(RoleType roleType) {
+        this.roleType = roleType;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public Locker getLocker() {
+        return locker;
+    }
+
+    public void setLocker(Locker locker) {
+        this.locker = locker;
+    }
+
+    public List<MemberProduct> getMemberProducts() {
+        return memberProducts;
+    }
+
+    public void setMemberProducts(List<MemberProduct> memberProducts) {
+        this.memberProducts = memberProducts;
+    }
 }
