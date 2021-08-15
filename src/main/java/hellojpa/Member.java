@@ -18,7 +18,7 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
 
-    @ManyToOne(fetch = FetchType.LAZY)  // 프록시 객체만 조회
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
     private Team team;
 
