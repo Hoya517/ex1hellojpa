@@ -18,8 +18,8 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
 
-    @ManyToOne
-    @JoinColumn(name = "TEAM_ID" ,insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY)  // 프록시 객체만 조회
+    @JoinColumn
     private Team team;
 
     @OneToOne
