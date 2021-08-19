@@ -1,8 +1,6 @@
 package hellojpa;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Member extends BaseEntity {
@@ -15,12 +13,11 @@ public class Member extends BaseEntity {
     @Column(name = "USERNAME")
     private String username;
 
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
+    @Embedded
+    private Period wordPeriod;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn
-    private Team team;
+    @Embedded
+    private Address homeAddress;
 
     @OneToOne
     @JoinColumn(name = "LOCKER_ID")
@@ -45,35 +42,19 @@ public class Member extends BaseEntity {
         this.username = username;
     }
 
-    public RoleType getRoleType() {
-        return roleType;
+    public Period getWordPeriod() {
+        return wordPeriod;
     }
 
-    public void setRoleType(RoleType roleType) {
-        this.roleType = roleType;
+    public void setWordPeriod(Period wordPeriod) {
+        this.wordPeriod = wordPeriod;
     }
 
-    public Team getTeam() {
-        return team;
+    public Address getHomeAddress() {
+        return homeAddress;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
-    public Locker getLocker() {
-        return locker;
-    }
-
-    public void setLocker(Locker locker) {
-        this.locker = locker;
-    }
-
-    public List<MemberProduct> getMemberProducts() {
-        return memberProducts;
-    }
-
-    public void setMemberProducts(List<MemberProduct> memberProducts) {
-        this.memberProducts = memberProducts;
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
     }
 }
